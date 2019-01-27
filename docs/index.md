@@ -35,6 +35,7 @@ The venues were then grouped and counted by community code, and the resulting se
 
 ### Exploration
 A correlation matrix was generated, but no clear correlations were found with breakfast restaurants:
+
 ![A correlation matrix showing no strong correlations](https://hexaguin.github.io/Coursera_Capstone/figs/Breakfast_corr_1.png)
 
 | Variable    | Correlation to Breakfast |

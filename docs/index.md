@@ -58,5 +58,5 @@ A correlation matrix was generated, but no clear correlations were found with br
 
 The negative correlations with residents ages 5-19 and 45-54 were explored, but no major insights were gained from this.
 
-<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_by_age.html" height=650 width=100%></iframe>
+<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_by_age.html" height="650" width="100%"></iframe>
 *These plots are interactive. Click and drag to zoom, click a trace in the legend to toggle it, and double click to reset zoom.*

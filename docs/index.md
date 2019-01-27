@@ -19,7 +19,7 @@ The [Traffic Volumes for 2016](https://data.calgary.ca/Transportation-Transit/Tr
 
 ## Methodology
 ### Acquisition and Processing
-After retrieving the census information and merging it with the, requests to Foursquare's `explore` endpoint were made for the centeroids of every community with the search term "breakfast". The resulting list of restaurants was cleaned by removing duplicates by unique ID, and filtering out commonly reoccuring names of venues (i.e. major quick-serve chains and grocery stores), as the focus of this analysis is on inmdependent breakfast restaurants and small breakfast chains.
+After retrieving the census information and merging it with the, requests to Foursquare's `explore` endpoint were made for the centeroids of every community with the search term "breakfast". The resulting list of restaurants was cleaned by removing duplicates by unique ID, and filtering out commonly occuring names of venues (i.e. major quick-serve chains and grocery stores), as the focus of this analysis is on independent breakfast restaurants and small breakfast chains.
 
 The coordinates of each venue were then compared to the community centroids to assign an accurate community code to each venue. After this was done, a dataframe of 367 rows was left, each with a community accurately assigned:
 
@@ -63,7 +63,7 @@ The negative correlations with residents ages 5-19 and 45-54 were explored, but 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_by_age.html" height="650" width="100%"></iframe>
 *These plots are interactive. Click and drag to zoom, click a trace in the legend to toggle it, and double click to reset zoom.*
 
-The next exploritory path was to map out the locations of the restaurants and look for geographic patterns:
+The next exploratory path was to map out the locations of the restaurants and look for geographic patterns:
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast.html" height="650" width="100%"></iframe>
 
@@ -71,7 +71,7 @@ The restaurants were clearly clustered near major roads and other high traffic a
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/traffic.html" height="650" width="100%"></iframe>
 
-Major artieries showed up perfectly well on the heat map (Deerfoot Trail, Glenmore Trail), but there's an inherrant flaw in using a standard neighbor regression model (or pretty much any common regression model) to generate a map like this: areas such as downtown consist of many small roads, each with a small to moderate amount of traffic. As a result, the mean traffic quantity is low, even if that area actually has quite a large number of vehicles traveling through it in total. The solution was to write a new implementation of RNR that returns a *sum* of the values of the neighbors instead of the mean. Since it's implemented as a loop, it's much far slower than Scikit-Learn's version, but it works fine for the purposes of this project:
+Major arteries showed up perfectly well on the heat map (Deerfoot Trail, Glenmore Trail), but there's an inherent flaw in using a standard neighbor regression model (or pretty much any common regression model) to generate a map like this: areas such as downtown consist of many small roads, each with a small to moderate amount of traffic. As a result, the mean traffic quantity is low, even if that area actually has quite a large number of vehicles traveling through it in total. The solution was to write a new implementation of RNR that returns a *sum* of the values of the neighbors instead of the mean. Since it's implemented as a loop, it's much far slower than Scikit-Learn's version, but it works fine for the purposes of this project:
 
 ```python
 def sum_of_radius(long, lat, radius):
@@ -86,5 +86,5 @@ This new model far better represents the parts of the city with high levels of a
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/traffic_sums.html" height="650" width="100%"></iframe>
 
-Each community had its traffic metric recalculated based on this new sum method. This led to the a potentially solid corrolation: traffic and breakfast restaurants had a pearson corrolation coefficiant of 0.492381.
+Each community had its traffic metric recalculated based on this new sum method. This led to the a potentially solid correlation: traffic and breakfast restaurants had a pearson correlation coefficient of 0.492381.
 

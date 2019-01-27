@@ -92,4 +92,9 @@ Each community had its traffic metric recalculated based on this new sum method.
 
 ### Modeling
 
-Polynomial regression was used to model the relationship between
+Polynomial regression was used to model the relationship between traffic in a community and the number of resturants. The relationship, 1.893 + -7.583058934622668 \* 10^-8 X + 4.6704041130661247 \* 10^-13 X^2, can then be compared to the data points:
+
+<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/poly_regress.html" height="650" width="100%"></iframe>
+
+## Results
+

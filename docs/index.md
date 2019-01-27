@@ -33,6 +33,7 @@ The venues were then grouped and counted by community code, and the resulting se
 |-|-|
 |MEA | 6 |
 
+### Exploration
 A correlation matrix was generated, but no clear correlations were found with breakfast restaurants:
 ![A correlation matrix showing no strong correlations](https://hexaguin.github.io/Coursera_Capstone/figs/Breakfast_corr_1.png)
 
@@ -60,3 +61,11 @@ The negative correlations with residents ages 5-19 and 45-54 were explored, but 
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_by_age.html" height="650" width="100%"></iframe>
 *These plots are interactive. Click and drag to zoom, click a trace in the legend to toggle it, and double click to reset zoom.*
+
+The next exploritory path was to map out the locations of the restaurants and look for geographic patterns:
+
+<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast.html" height="650" width="100%"></iframe>
+
+The restaurants were clearly clustered near major roads and other high traffic areas. The 2016 traffic data was imported, and a radius neighbor regressor (similar to K nearest neighbors, but using a fixed radius instead of a fixed quantity of neighbors) was used to generate a traffic heatmap for Calgary:
+
+<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/traffic.html" height="650" width="100%"></iframe>

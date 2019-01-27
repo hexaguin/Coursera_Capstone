@@ -92,9 +92,38 @@ Each community had its traffic metric recalculated based on this new sum method.
 
 ### Modeling
 
-Polynomial regression was used to model the relationship between traffic in a community and the number of resturants. The relationship, 1.893 + -7.583058934622668 \* 10^-8 X + 4.6704041130661247 \* 10^-13 X^2, can then be compared to the data points:
+Polynomial regression was used to model the relationship between traffic in a community and the number of resturants. The relationship, 1.893 + -7.583058934622668\*10<sup>-8</sup>X + 4.6704041130661247\*10<sup>-13</sup>X<sup>2</sup>, can then be compared to the data points:
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/poly_regress.html" height="650" width="100%"></iframe>
 
 ## Results
 
+### Regression Results
+
+The following communities have significantly fewer breakfast restaurants than should be supported by the traffic they receive:
+
+* Chinatown
+* Sunnyside
+* Crescent Heights
+* Mission
+* Rosedale
+
+### Other Findings of Note
+
+* Residential demographics are not a major factor when determining how many breakfast restaurants an area can support
+* There is a weak negative correlation between households with children or teens and breakfast restaurants
+
+## Discussion
+
+Prospective breakfast restaurateurs should choose a location based on where their clientelle are going during the day, not where they live. It can be inferred from the data that most morning diners choose breakfast locations on the way to or near their daily destinations (such as workplaces), not near their residences. The negative correlation between children and breakfast restaurants may be because families with kids go out for breakfast less frequently, but the more likely scenario is that both kids and breakfast restaurants share a relationship with traffic flow (kids are often raised in quiet subburbs, breakfast restaurants are located in busy, high-traffic areas). 
+
+Out of the 5 notable outliers:
+
+* Chinatown *may* be a viable option if the restaurateur believes they could create a compelling Chineese breakfast experience. 
+* Sunnyside is adjacent to Eau Claire and Hilhurst, both of which have reached the modeled capacity for breakfast restaurants. It also has virtually zero commercial space. Sunnyside is a poor choice of location.
+* Crescent Heights has a relatively sizable amount of commercial space on the north side, which also faces the Trans-Canada Highway. There are already a number of restaurants in this region, but no breakfast restaurants. Crescent Heights is an excellent choice of community.
+* Like Crescent Heights, Mission is already packed with restaurants. It is also located just off one of Calgary's largest dining destinations, 17th Ave. High traffic, plenty of commercial space, and only a couple competitors. Mission is a good choice.
+* Rosedale is directly next to Crescent Heights, and also along the Trans-Canada. However, it is almost entirely housing. There is no practical way to establish a restaurant here.
+
+## Conclusion
+Crescent Heights, Mission, and Chinatown are all viable locations to establish a breakfast restaurant. 

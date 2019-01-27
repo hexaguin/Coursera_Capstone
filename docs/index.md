@@ -88,3 +88,8 @@ This new model far better represents the parts of the city with high levels of a
 
 Each community had its traffic metric recalculated based on this new sum method. This led to the a potentially solid correlation: traffic and breakfast restaurants had a pearson correlation coefficient of 0.492381.
 
+<iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_traffic_sum.html" height="650" width="100%"></iframe>
+
+### Modeling
+
+Polynomial regression was used to model the relationship between

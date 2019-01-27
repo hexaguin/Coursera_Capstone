@@ -1,13 +1,11 @@
 # Potential Breakfast Restaurant Locations
 ## Introduction
 Calgary is home to a vibrant culinary scene, and breakfast restaurants are no exception. However, while some areas (such as 17th ave) are nearly saturated in gourmet breakfast establishments, others are nearly devoid of anything other than fast food chains. If an up-and-coming Calgarian chef wanted to establish their very own breakfast joint, which communities would be most suitable? In other words, which communities in Calgary have the highest unmet demand for breakfast? 
+
 ## Data
-[Foursquare](https://developer.foursquare.com/) will be used to gather data on the current selection of breakfast restaurants in Calgary. Foursquare provides data on different types of restaurants in a given area, as well a couple of highly useful statistics on any given restaurant via the [details endpoint](https://developer.foursquare.com/docs/api/venues/details):
+[Foursquare](https://developer.foursquare.com/) was used to gather data on the current selection of breakfast restaurants in Calgary. 
 
-* Hours of opperation (`hours`), a key factor in determining whether a restaurant serves breakfast
-* Popular times (`popular`), useful for determining if people actually go there for breakfast
-
-Demographic data on Calgarians and their communities will be gathered from [Open Calgary](https://data.calgary.ca/) datasets such as the [2018 Census](https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs). The 2018 census data is available as a CSV, and contains many helpful fields:
+Demographic data on Calgarians and their communities was gathered from [Open Calgary](https://data.calgary.ca/) datasets such as the [2016 Census](https://data.calgary.ca/Demographics/Census-By-Community-2016/cje4-zd6c). The 2016 census data is available as a CSV, and contains many potentially helpful fields:
 
 | Field      | Description             |
 -------------|-------------------------|
@@ -15,4 +13,50 @@ Demographic data on Calgarians and their communities will be gathered from [Open
 | EMPLYD_CNT | Employed persons include those 15 years of age and older who are employed full or part time. |
 | MF_25_34 | Total number of male and female residents aged 25 to 34 (other age-based fields are similarly helpful) |
 
-The [Citizen Satisfaction Survey 2017](https://data.calgary.ca/dataset/Citizen-Satisfaction-Survey-2017/kgh7-mhue) will also be used to determine factors such as income category (column q39) on a per-ward basis.
+The [Community Points](https://data.calgary.ca/Base-Maps/Community-Points/j9ps-fyst) dataset was used to determine the centroids of every community.
+
+The [Traffic Volumes for 2016](https://data.calgary.ca/Transportation-Transit/Traffic-Volumes-for-2016/wtec-i6zq) dataset was later used to determine the average traffic flow through communities. This dataset consists of a series of line segments representing sections of road, each with an average daily weekday traffic (ADWT) figure.
+
+## Methodology
+### Acquisition and Processing
+After retrieving the census information and merging it with the, requests to Foursquare's `explore` endpoint were made for the centeroids of every community with the search term "breakfast". The resulting list of restaurants was cleaned by removing duplicates by unique ID, and filtering out commonly reoccuring names of venues (i.e. major quick-serve chains and grocery stores), as the focus of this analysis is on inmdependent breakfast restaurants and small breakfast chains.
+
+The coordinates of each venue were then compared to the community centroids to assign an accurate community code to each venue. After this was done, a dataframe of 367 rows was left, each with a community accurately assigned:
+
+| Community Name	| Community Code | Venue Name	| Venue ID | Lat | Long |
+|-----------------|----------------|------------|----------|-----|------|
+| MEADOWLARK PARK	| MEA | Phil & Sebastian Coffee Roaster	| 4ca4d97f7f84224b96e5d058	| 51.000426 | -114.073290	|
+
+The venues were then grouped and counted by community code, and the resulting series of quantities was added to the census dataframe:
+
+| Community Code | Breakfast Venues |
+|-|-|
+|MEA | 6 |
+
+A correlation matrix was generated, but no clear correlations were found with breakfast restaurants:
+![A correlation matrix showing no strong correlations](https://hexaguin.github.io/Coursera_Capstone/figs/Breakfast_corr_1.png)
+
+| Variable    | Correlation to Breakfast |
+|-------------|-----------|
+| MF_5_14     | -0.219541 |
+| MF_15_19    | -0.219344 |
+| MF_45_54    | -0.167594 |
+| CLASS_CODE  | -0.162177 |
+| MF_55_64    | -0.157547 |
+| MF_65_74    | -0.151949 |
+| MF_0_4      | -0.139235 |
+| latitude    | -0.125138 |
+| RES_CNT     | -0.121087 |
+| MF_35_44    | -0.092574 |
+| EMPLYD_CNT  | -0.087024 |
+| MF_20_24    | -0.061474 |
+| MF_75       | -0.041933 |
+| longitude   |  0.010927 |
+| DWELL_CNT   |  0.018546 |
+| MF_25_34    |  0.049030 |
+| Breakfast   |  1.000000 |
+
+The negative correlations with residents ages 5-19 and 45-54 were explored, but no major insights were gained from this.
+
+<iframe src=https://hexaguin.github.io/Coursera_Capstone/figs/breakfast_by_age.html></iframe>
+*These plots are interactive. Click and drag to zoom, click a trace in the legend to toggle it, and double click to reset zoom.*

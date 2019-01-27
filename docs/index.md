@@ -70,3 +70,14 @@ The next exploritory path was to map out the locations of the restaurants and lo
 The restaurants were clearly clustered near major roads and other high traffic areas. The 2016 traffic data was imported, and a radius neighbor regressor (similar to K nearest neighbors, but using a fixed radius instead of a fixed quantity of neighbors) was used to generate a traffic heatmap for Calgary:
 
 <iframe src="https://hexaguin.github.io/Coursera_Capstone/figs/traffic.html" height="650" width="100%"></iframe>
+
+Major artieries showed up perfectly well on the heat map (Deerfoot Trail, Glenmore Trail), but there's an inherrant flaw in using a standard neighbor regression model (or pretty much any common regression model) to generate a map like this: areas such as downtown consist of many small roads, each with a small to moderate amount of traffic. As a result, the mean traffic quantity is low, even if that area actually has quite a large number of vehicles traveling through it in total. The solution was to write a new implementation of RNR that returns a *sum* of the values of the neighbors instead of the mean. Since it's implemented as a loop, it's much far slower than Scikit-Learn's version, but it works fine for our needs:
+
+```
+def sum_of_radius(long, lat, radius):
+    total = 0
+    for index, row in traffic_data.iterrows(): # There MUST be a better way to do this
+        if math.sqrt((row['Latitude']-lat)**2 + (row['Longitude']-long)**2) < radius:
+            total += row['VOLUME']
+    return total
+```
